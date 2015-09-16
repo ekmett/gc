@@ -9,7 +9,7 @@
 -- Stability   :  experimental
 -- Portability :  GHC
 --
--- This module supplies a variant of
+-- This module supplies a variant of the selfish form of
 -- <http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf "Poor Richard's Memory Manager">
 -- by Hertz, Kane, Keudel, Bai, Ding, Gu and Bard, adapted to run in
 -- Haskell in user-space.
