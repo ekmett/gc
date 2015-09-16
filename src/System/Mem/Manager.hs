@@ -46,6 +46,7 @@ foreign import ccall "getCurrentRSS" currentResidentSetSize :: IO CSize
 -- | Retrieve the current peak resident set size for the currently executing program.
 foreign import ccall "getPeakRSS" peakResidentSetSize :: IO CSize
 
+-- | Return the total number of \"hard page-faults\" since the program started. These are page-faults which required us to go out to disk.
 foreign import ccall "getHardPageFaults" hardPageFaults :: IO CSize
 
 data ManagerState
