@@ -35,7 +35,7 @@ flag test-hlint
 
 library
   build-depends:
-    base >= 4.8 && < 5,
+    base >= 4.8 && < 5
 
   exposed-modules:
     System.RSS
