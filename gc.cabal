@@ -38,7 +38,7 @@ library
     base >= 4.8 && < 5
 
   exposed-modules:
-    System.RSS
+    System.Mem.RSS
 
   ghc-options: -Wall -fwarn-tabs
 
