@@ -1,5 +1,29 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
 {-# OPTIONS_GHC -fno-cse -fno-full-laziness -fno-float-in #-}
+
+-----------------------------------------------------------------------------
+-- |
+-- Copyright   :  (C) 2015 Edward Kmett
+-- License     :  BSD-style (see the file LICENSE)
+-- Maintainer  :  Edward Kmett <ekmett@gmail.com>
+-- Stability   :  experimental
+-- Portability :  GHC
+--
+-- This module supplies a variant of
+-- <http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf "Poor Richard's Memory Manager">
+-- by Hertz, Kane, Keudel, Bai, Ding, Gu and Bard, adapted to run in
+-- Haskell in user-space.
+--
+-- To incorporate this into your program invoke 'selfishManager' from your @main@ to spawn
+-- a background thread that will perform garbage collection whenever it encounters signs of
+-- system back-pressure, rather than just when a predefined system memory limit is reached.
+--
+-- It'd be possible to implement communal and leadership whiteboarding between
+-- programs as well, but this should serve as a sufficient proof of concept
+-- for now.
+-----------------------------------------------------------------------------
+
+
 module System.Mem.Manager
   ( currentResidentSetSize
   , peakResidentSetSize
