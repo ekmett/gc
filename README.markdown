@@ -5,6 +5,19 @@ gc
 
 Experimenting with building [Poor Richard's Memory Manager](http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf) in Haskell user space.
 
+Usage:
+
+```haskell
+import System.Mem.Manager
+
+main = do
+  _ <- selfishManager
+  ...
+```
+
+Now an oracle will look for signs of memory pressure from the host operating system and attempt more aggressive garbage collection
+in response.
+
 Contact Information
 -------------------
 
