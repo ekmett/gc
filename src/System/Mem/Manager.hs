@@ -47,7 +47,7 @@ managedCollections :: IORef Int
 managedCollections = unsafePerformIO $ newIORef 0
 {-# NOINLINE managedCollections #-}
 
--- | Run a background thread that checks for memory pressure from the Host OS and kickstarts a GC.
+-- | Run a background thread that checks for signs of memory pressure from the Host OS and kickstarts a garbage collection as needed.
 selfishManager :: IO ThreadId
 selfishManager = forkIO $ forever $ do
   b <- checkMemoryPressure
