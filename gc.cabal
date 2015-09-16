@@ -13,7 +13,7 @@ copyright:     Copyright (C) 2015 Edward A. Kmett
 build-type:    Custom
 tested-with:   GHC == 7.4.3, GHC == 7.6.2, GHC == 7.8.4, GHC == 7.10.2
 synopsis:      Poor Richard's Memory Manager
-description:   Poor Richard's Memory Manager
+description:   Implementing <http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf Poor Richard's Memory Manager> in user-space in GHC.
 
 extra-source-files:
   CHANGELOG.markdown
