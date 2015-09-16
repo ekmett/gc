@@ -3,6 +3,11 @@
  * Site:    http://NadeauSoftware.com/
  * License: Creative Commons Attribution 3.0 Unported License
  *          http://creativecommons.org/licenses/by/3.0/deed.en_US
+ *
+ * Changes made by Edward Kmett in 2015:
+ *
+ * * Minor formatting changes.
+ * * Added getHardPageFaults()
  */
 
 #if defined(_WIN32)
