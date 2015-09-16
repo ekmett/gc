@@ -25,11 +25,13 @@
 
 
 module System.Mem.Manager
-  ( currentResidentSetSize
+  ( -- * Memory Manager
+    selfishManager
+    -- * Statistics and Utilities
+  , currentResidentSetSize
   , peakResidentSetSize
   , hardPageFaults
   , checkMemoryPressure
-  , selfishManager
   , cumulativeManagedCollections
   ) where
 
