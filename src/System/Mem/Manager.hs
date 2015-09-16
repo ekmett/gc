@@ -66,6 +66,8 @@ managerState = unsafePerformIO $ newIORef NoManagerState
 {-# NOINLINE managerState #-}
 
 -- | Determine if memory pressure warrants further action.
+--
+-- This will return 'True' if we are getting signs from the operating system that we should reign in our memory usage.
 checkMemoryPressure :: IO Bool
 checkMemoryPressure = do
   old <- readIORef managerState 
