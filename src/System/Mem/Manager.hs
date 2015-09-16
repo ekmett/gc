@@ -1,4 +1,5 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE Trustworthy #-}
 {-# OPTIONS_GHC -fno-cse -fno-full-laziness -fno-float-in #-}
 
 -----------------------------------------------------------------------------
