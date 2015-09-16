@@ -14,13 +14,18 @@
 -- by Hertz, Kane, Keudel, Bai, Ding, Gu and Bard, adapted to run in
 -- Haskell in user-space.
 --
--- To incorporate this into your program invoke 'selfishManager' from your @main@ to spawn
--- a background thread that will perform garbage collection whenever it encounters signs of
--- system back-pressure, rather than just when a predefined system memory limit is reached.
+-- Usage:
 --
--- It'd be possible to implement communal and leadership whiteboarding between
--- programs as well, but this should serve as a sufficient proof of concept
--- for now.
+-- @
+-- main = do
+--   _ <- 'selfishManager'
+--   ...
+-- @
+--
+-- Now, the background thread that was spawned by 'selfishManager' will watch for signs that the host operating system
+-- is starting to cause the current process to page out to disk and respond with more aggressive garbage collection.
+--
+-- This enables your code to avoid the inevitable death spiral that follows when GC has to happen with paged out data.
 -----------------------------------------------------------------------------
 
 
