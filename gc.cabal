@@ -24,7 +24,7 @@ description:
   >   _ <- selfishManager
   >   ...
   .
-  Now, the background thread that was spawned by selfishManager will watch for signs that the host operating system
+  Now, the background thread that was spawned by @selfishManager@ will watch for signs that the host operating system
   is starting to cause the current process to page out to disk and respond with more aggressive garbage collection.
   This enables your code to avoid the inevitable death spiral that follows when GC has to happen with paged out data.
 
