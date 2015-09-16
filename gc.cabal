@@ -11,7 +11,7 @@ homepage:      http://github.com/ekmett/gc/
 bug-reports:   http://github.com/ekmett/gc/issues
 copyright:     Copyright (C) 2015 Edward A. Kmett
 build-type:    Custom
-tested-with:   GHC == 7.4.3, GHC == 7.6.2, GHC == 7.8.4, GHC == 7.10.2
+tested-with:   GHC == 7.8.4, GHC == 7.10.2
 synopsis:      Poor Richard's Memory Manager
 description:   Implementing <http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf Poor Richard's Memory Manager> in user-space in GHC.
 
@@ -35,7 +35,7 @@ flag test-hlint
 
 library
   build-depends:
-    base >= 4.5 && < 5
+    base >= 4.7 && < 5
 
   exposed-modules:
     System.Mem.Manager
@@ -58,9 +58,9 @@ test-suite doctests
     buildable: False
   else
     build-depends:
-      base >= 4.5,
-      directory      >= 1.0,
-      doctest        >= 0.9.1,
+      base,
+      directory >= 1.0,
+      doctest >= 0.9.1,
       filepath,
       parallel
 
