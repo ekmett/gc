@@ -3,7 +3,7 @@ gc
 
 [![Build Status](https://secure.travis-ci.org/ekmett/gc.png?branch=master)](http://travis-ci.org/ekmett/gc)
 
-Experimenting with building [Poor Richard's Memory Manager](http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf) in Haskell user space.
+Experimenting with building [Poor Richard's Memory Manager](http://www.cse.buffalo.edu/~mhertz/prmm-ismm-2011.pdf) in Haskell user space.
 
 Usage:
 
