@@ -32,6 +32,7 @@ description:
 extra-source-files:
   CHANGELOG.markdown
   README.markdown
+  Warning.hs
 
 custom-setup
   setup-depends:
