@@ -1,6 +1,6 @@
 name:          gc
 category:      Data
-version:       0.0.1
+version:       0.0.2
 license:       BSD3
 cabal-version: >= 1.16
 license-file:  LICENSE
