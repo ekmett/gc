@@ -16,7 +16,7 @@ tested-with:   GHC == 7.8.4
              , GHC == 8.0.2
              , GHC == 8.2.2
              , GHC == 8.4.4
-             , GHC == 8.6.2
+             , GHC == 8.6.3
 synopsis:      Poor Richard's Memory Manager
 description:
   This package implements a form of <http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf Poor Richard's Memory Manager>
