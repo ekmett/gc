@@ -10,7 +10,7 @@ stability:     provisional
 homepage:      http://github.com/ekmett/gc/
 bug-reports:   http://github.com/ekmett/gc/issues
 copyright:     Copyright (C) 2015 Edward A. Kmett
-build-type:    Custom
+build-type:    Simple
 tested-with:   GHC == 7.8.4
              , GHC == 7.10.3
              , GHC == 8.0.2
@@ -37,22 +37,10 @@ description:
 extra-source-files:
   CHANGELOG.markdown
   README.markdown
-  Warning.hs
-
-custom-setup
-  setup-depends:
-    base          >= 4.3 && <5,
-    Cabal         >= 1.10,
-    cabal-doctest >= 1 && <1.1
 
 source-repository head
   type: git
   location: git://github.com/ekmett/gc.git
-
--- You can disable the doctests test suite with -f-test-doctests
-flag test-doctests
-  default: True
-  manual: True
 
 library
   build-depends:
@@ -67,21 +55,3 @@ library
   default-language: Haskell2010
 
   c-sources: cbits/rss.c
-
-test-suite doctests
-  type:           exitcode-stdio-1.0
-  main-is:        doctests.hs
-  ghc-options:    -Wall -threaded
-  hs-source-dirs: tests
-  default-language: Haskell2010
-
-  if !flag(test-doctests)
-    buildable: False
-  else
-    build-depends:
-      base,
-      directory >= 1.0,
-      doctest >= 0.9.1,
-      filepath,
-      gc,
-      parallel
