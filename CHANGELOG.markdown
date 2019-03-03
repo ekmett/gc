@@ -1,3 +1,9 @@
+next [????.??.??]
+-----------------
+* Fix the build on Windows.
+* Remove the `doctests` test suite, as there were never any `doctest`s to
+  begin with.
+
 0.0.2
 -----
 * Add a library dependency on the `doctests` test suite

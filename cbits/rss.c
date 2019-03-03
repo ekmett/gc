@@ -117,7 +117,18 @@ size_t getCurrentRSS() {
 
 /** Return the number of hard page faults that have occurred. */
 size_t getHardPageFaults() {
+#if defined(_WIN32)
+  /* Windows --------------------------------------------------
+
+     It's not clear how to obtain the number of hard page faults
+     on Windows. Taking inspiraton from GHC's getPageFaults function
+     (https://gitlab.haskell.org/ghc/ghc/blob/1285d6b95fbae7858abbc4722bc2301d7fe40425/rts/win32/GetTime.c#L148-154),
+     we return an extremely conservative lower bound. */
+  return 0;
+#else
+  /* Other OSes ----------------------------------------------- */
   struct rusage rusage;
   getrusage(RUSAGE_SELF, &rusage);
   return (size_t)rusage.ru_majflt;
+#endif
 }
