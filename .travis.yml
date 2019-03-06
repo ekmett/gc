@@ -145,5 +145,5 @@ script:
   # hlint
   - (cd gc-* && hlint src --cpp-ansi --cpp-define=HLINT)
 
-# REGENDATA ["-o",".travis.yml","--ghc-head","--irc-channels=irc.freenode.org#haskell-lens","--no-no-tests-no-benchmarks","--no-unconstrained","cabal.project"]
+# REGENDATA ["--output=.travis.yml","--config=cabal.haskell-ci","cabal.project"]
 # EOF
