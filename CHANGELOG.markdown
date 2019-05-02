@@ -1,5 +1,5 @@
-next [????.??.??]
------------------
+0.0.3 [2019.05.02]
+------------------
 * Fix the build on Windows.
 * Remove the `doctests` test suite, as there were never any `doctest`s to
   begin with.
