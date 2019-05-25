@@ -5,7 +5,10 @@ gc
 
 Experimenting with building [Poor Richard's Memory Manager](http://www.cse.buffalo.edu/~mhertz/prmm-ismm-2011.pdf) in Haskell user space.
 
-Usage:
+
+**This doesn't actually work, because GHC actually returns memory to the operating system in a way that breaks my metrics.**
+
+The intended Usage was something like:
 
 ```haskell
 import System.Mem.Manager
@@ -15,8 +18,7 @@ main = do
   ...
 ```
 
-Now an oracle will look for signs of memory pressure from the host operating system and attempt more aggressive garbage collection
-in response.
+Now an oracle would look for signs of memory pressure from the host operating system and attempt more aggressive garbage collection in response.
 
 Contact Information
 -------------------
