@@ -1,134 +1,27 @@
-/*
- * Author:  David Robert Nadeau
- * Site:    http://NadeauSoftware.com/
- * License: Creative Commons Attribution 3.0 Unported License
- *          http://creativecommons.org/licenses/by/3.0/deed.en_US
- *
- * Changes made by Edward Kmett in 2015:
- *
- * * Minor formatting changes.
- * * Added getHardPageFaults()
- */
+#ifndef _WIN32
 
-#if defined(_WIN32)
-#include <windows.h>
-#include <psapi.h>
-
-#elif defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
 #include <unistd.h>
 #include <sys/resource.h>
 
-#if defined(__APPLE__) && defined(__MACH__)
-#include <mach/mach.h>
-
-#elif (defined(_AIX) || defined(__TOS__AIX__)) || (defined(__sun__) || defined(__sun) || defined(sun) && (defined(__SVR4) || defined(__svr4__)))
-#include <fcntl.h>
-#include <procfs.h>
-
-#elif defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
-#include <stdio.h>
-
 #endif
-
-#else
-#error "Cannot define getPeakRSS( ) or getCurrentRSS( ) for an unknown OS."
-#endif
-
-/**
- * Returns the peak (maximum so far) resident set size (physical
- * memory use) measured in bytes, or zero if the value cannot be
- * determined on this OS.
- */
-size_t getPeakRSS() {
-#if defined(_WIN32)
-  /* Windows -------------------------------------------------- */
-  PROCESS_MEMORY_COUNTERS info;
-  GetProcessMemoryInfo( GetCurrentProcess( ), &info, sizeof(info) );
-  return (size_t)info.PeakWorkingSetSize;
-
-#elif (defined(_AIX) || defined(__TOS__AIX__)) || (defined(__sun__) || defined(__sun) || defined(sun) && (defined(__SVR4) || defined(__svr4__)))
-  /* AIX and Solaris ------------------------------------------ */
-  struct psinfo psinfo;
-  int fd = -1;
-  if ((fd = open( "/proc/self/psinfo", O_RDONLY )) == -1)
-    return (size_t)0L;    /* Can't open? */
-  if (read( fd, &psinfo, sizeof(psinfo) ) != sizeof(psinfo)) {
-    close(fd);
-    return (size_t)0L;    /* Can't read? */
-  }
-  close(fd);
-  return (size_t)(psinfo.pr_rssize * 1024L);
-
-#elif defined(__unix__) || defined(__unix) || defined(unix) || (defined(__APPLE__) && defined(__MACH__))
-  /* BSD, Linux, and OSX -------------------------------------- */
-  struct rusage rusage;
-  getrusage(RUSAGE_SELF, &rusage);
-#if defined(__APPLE__) && defined(__MACH__)
-  return (size_t)rusage.ru_maxrss;
-#else
-  return (size_t)(rusage.ru_maxrss * 1024L);
-#endif
-
-#else
-  /* Unknown OS ----------------------------------------------- */
-  return (size_t)0L;      /* Unsupported. */
-#endif
-}
-
-
-/**
- * Returns the current resident set size (physical memory use) measured
- * in bytes, or zero if the value cannot be determined on this OS.
- */
-size_t getCurrentRSS() {
-#if defined(_WIN32)
-  /* Windows -------------------------------------------------- */
-  PROCESS_MEMORY_COUNTERS info;
-  GetProcessMemoryInfo( GetCurrentProcess( ), &info, sizeof(info) );
-  return (size_t)info.WorkingSetSize;
-
-#elif defined(__APPLE__) && defined(__MACH__)
-  /* OSX ------------------------------------------------------ */
-  struct mach_task_basic_info info;
-  mach_msg_type_number_t infoCount = MACH_TASK_BASIC_INFO_COUNT;
-  if (task_info(mach_task_self( ), MACH_TASK_BASIC_INFO,
-    (task_info_t)&info, &infoCount) != KERN_SUCCESS)
-    return (size_t)0L;    /* Can't access? */
-  return (size_t)info.resident_size;
-
-#elif defined(__linux__) || defined(__linux) || defined(linux) || defined(__gnu_linux__)
-  /* Linux ---------------------------------------------------- */
-  long rss = 0L;
-  FILE* fp = NULL;
-  if ((fp = fopen( "/proc/self/statm", "r" )) == NULL)
-    return (size_t)0L;    /* Can't open? */
-  if ( fscanf( fp, "%*s%ld", &rss ) != 1 ) {
-    fclose(fp);
-    return (size_t)0L;    /* Can't read? */
-  }
-  fclose(fp);
-  return (size_t)rss * (size_t)sysconf( _SC_PAGESIZE);
-
-#else
-  /* AIX, BSD, Solaris, and Unknown OS ------------------------ */
-  return (size_t)0L;      /* Unsupported. */
-#endif
-}
 
 /** Return the number of hard page faults that have occurred. */
 size_t getHardPageFaults() {
-#if defined(_WIN32)
-  /* Windows --------------------------------------------------
+
+#ifndef _WIN32
+
+  struct rusage rusage;
+  getrusage(RUSAGE_SELF, &rusage);
+  return (size_t)rusage.ru_majflt;
+
+#else
+  /* Windows
 
      It's not clear how to obtain the number of hard page faults
      on Windows. Taking inspiraton from GHC's getPageFaults function
      (https://gitlab.haskell.org/ghc/ghc/blob/1285d6b95fbae7858abbc4722bc2301d7fe40425/rts/win32/GetTime.c#L148-154),
-     we return an extremely conservative lower bound. */
+     we return a conservative lower bound. 
+  */
   return 0;
-#else
-  /* Other OSes ----------------------------------------------- */
-  struct rusage rusage;
-  getrusage(RUSAGE_SELF, &rusage);
-  return (size_t)rusage.ru_majflt;
 #endif
 }
