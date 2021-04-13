@@ -1,6 +1,6 @@
 name:          gc
 category:      Data
-version:       0.0.3
+version:       0.1
 license:       BSD3
 cabal-version: 1.16
 license-file:  LICENSE
@@ -9,7 +9,7 @@ maintainer:    Edward A. Kmett <ekmett@gmail.com>
 stability:     provisional
 homepage:      http://github.com/ekmett/gc/
 bug-reports:   http://github.com/ekmett/gc/issues
-copyright:     Copyright (C) 2015 Edward A. Kmett
+copyright:     Copyright (C) 2015-2021 Edward A. Kmett
 build-type:    Simple
 tested-with:   GHC == 7.8.4
              , GHC == 7.10.3
@@ -17,7 +17,9 @@ tested-with:   GHC == 7.8.4
              , GHC == 8.2.2
              , GHC == 8.4.4
              , GHC == 8.6.5
-             , GHC == 8.8.1
+             , GHC == 8.8.4
+             , GHC == 8.10.4
+             , GHC == 9.0.1
 synopsis:      Poor Richard's Memory Manager
 description:
   This package implements a form of <http://www.cs.canisius.edu/~hertzm/prmm-ismm-2011.pdf Poor Richard's Memory Manager>

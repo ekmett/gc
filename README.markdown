@@ -6,10 +6,6 @@ gc
 Experimenting with building [Poor Richard's Memory Manager](http://www.cse.buffalo.edu/~mhertz/prmm-ismm-2011.pdf) in Haskell user space.
 
 
-**This doesn't actually work, because GHC actually returns memory to the operating system in a way that breaks my metrics.**
-
-The intended Usage was something like:
-
 ```haskell
 import System.Mem.Manager
 
@@ -18,7 +14,7 @@ main = do
   ...
 ```
 
-Now an oracle would look for signs of memory pressure from the host operating system and attempt more aggressive garbage collection in response.
+Now an oracle would look for signs of memory pressure from the host operating system and attempt more aggressive garbage collection in response. The current implementation matches the 'GenMS+Selfish' scheme from the original paper due to lack of information from GHC about how many pages have been returned to the OS.
 
 Contact Information
 -------------------

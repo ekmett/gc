@@ -1,3 +1,8 @@
+0.1 [2019.04.13]
+---
+* Reimplemented without RSS information. This should allow this to run portably
+  with most of the desired efficiency.
+
 0.0.3 [2019.05.02]
 ------------------
 * Fix the build on Windows.
